@@ -1,14 +1,15 @@
 from mediai.ingestion.loader import load_pdf
-
-
+from mediai.ingestion.normalizer import normalize_documents
 documents = load_pdf(
     "data/raw/WHO.pdf",
     start_page=21,
-    end_page=151,
-    exclude_pages=set()
-)
+    end_page=108,
+    exclude_pages=set())
+
 print(f"Pages loaded: {len(documents)}")
-for document in documents:
+normalized_documents = normalize_documents(documents)
+print(f"Normalized pages: {len(normalized_documents)}")
+for document in normalized_documents:
     text = document["text"]
     print(f"Page: {document['metadata']['pdf_page']}")
     print(f"Characters: {len(text)}")

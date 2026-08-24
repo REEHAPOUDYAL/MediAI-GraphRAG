@@ -1,7 +1,6 @@
 from pathlib import Path
 from pypdf import PdfReader
 
-
 def load_pdf(
     file_path: str,
     start_page: int = 1,
@@ -9,7 +8,6 @@ def load_pdf(
     exclude_pages: set[int] | None = None
 ):
     path = Path(file_path)
-
     if not path.exists():
         raise FileNotFoundError(f"PDF not found: {path}")
 
