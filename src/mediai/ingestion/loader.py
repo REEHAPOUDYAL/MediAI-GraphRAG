@@ -5,8 +5,7 @@ def load_pdf(
     file_path: str,
     start_page: int = 1,
     end_page: int | None = None,
-    exclude_pages: set[int] | None = None
-):
+    exclude_pages: set[int] | None = None):
     path = Path(file_path)
     if not path.exists():
         raise FileNotFoundError(f"PDF not found: {path}")
