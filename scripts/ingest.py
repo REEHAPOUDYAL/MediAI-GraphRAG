@@ -5,25 +5,17 @@ from mediai.embeddings.embedder import LocalEmbeddingModel
 from mediai.vectorstore.vector import VectorStore
 from tqdm import tqdm
 
-print("\nStarting PDF loading...", flush=True)
-
-documents = load_pdf(
-    "data/raw/WHO.pdf",
-    start_page=21,
-    end_page=100)
+print("\n Starting PDF loading", flush=True)
+documents = load_pdf("data/raw/WHO.pdf", start_page=21, end_page=100)
 
 print(f"[1/5] PDF loading complete: {len(documents)} documents\n", flush=True)
 
-print("[2/5] Starting text normalization...", flush=True)
+print("[2/5] Starting text normalization", flush=True)
 
 normalized_documents = normalize_documents(documents)
 
-print(
-    f"[2/5] Text normalization complete: "
-    f"{len(normalized_documents)} documents\n",
-    flush=True)
-
-print("[3/5] Starting document chunking...", flush=True)
+print(f"[2/5] Text normalization complete: " f"{len(normalized_documents)} documents\n", flush=True)
+print("[3/5] Starting document chunking", flush=True)
 
 chunks = chunk_documents_by_sentence(
     normalized_documents,
@@ -32,7 +24,7 @@ chunks = chunk_documents_by_sentence(
 
 print(f"[3/5] Document chunking complete: {len(chunks)} chunks\n", flush=True)
 
-print("[4/5] Loading embedding model...", flush=True)
+print("[4/5] Loading embedding model", flush=True)
 
 embedding_model = LocalEmbeddingModel()
 
@@ -40,9 +32,7 @@ print("[4/5] Embedding model loaded successfully.", flush=True)
 
 print("[4/5] Starting embedding generation...", flush=True)
 
-texts = [
-    chunk["text"]
-    for chunk in tqdm(chunks, desc="Preparing chunk texts"]
+texts = [chunk["text"] for chunk in tqdm(chunks, desc="Preparing chunk texts"]
 
 embeddings = embedding_model.embed_texts(texts)
 print("[4/5] Embedding generation complete.", flush=True)
